@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.19.1'  # Changed to supported version
+          node-version: '20.19.1'
           cache: 'npm'
 
       - name: Install dependencies
@@ -30,14 +30,23 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration production
 
+      - name: List build output (for debugging)
+        run: |
+          echo "Contents of current directory:"
+          ls -la
+          echo "Contents of dist directory:"
+          ls -la dist/
+          if [ -d "dist/Costic" ]; then
+            echo "Contents of dist/Costic:"
+            ls -la dist/Costic/
+          fi
+
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_FOREST_0D12ECA0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"
-          output_location: "dist/Costic"
-          skip_app_build: true  # Let GitHub Actions handle the build
-        env:
-          NODE_VERSION: '20.19.1'  # Updated to supported version
+          app_location: "dist/Costic"  # Point to the built Angular app
+          output_location: ""          # Empty since we're already pointing to built files
+          skip_app_build: true
