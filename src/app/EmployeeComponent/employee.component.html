@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Employee Management</h2>
+
+  <form (ngSubmit)="addEmployees()" class="form">
+    <input type="text" [(ngModel)]="newEmployee.name" name="name" placeholder="Name" required />
+    <input type="email" [(ngModel)]="newEmployee.mail" name="mail" placeholder="Email" required />
+    <input type="number" [(ngModel)]="newEmployee.salary" name="salary" placeholder="Salary" />
+    <input type="text" [(ngModel)]="newEmployee.domain" name="domain" placeholder="Domain" />
+    <button type="submit">Add</button>
+  </form>
+
+  <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
+
+  <ul>
+    <li *ngFor="let emp of employees">
+      <span>{{ emp.name }} | {{ emp.mail }} | {{ emp.salary }} | {{emp.domain}}  </span>
+      <button (click)="deleteEmployee(emp.mail!)">Delete</button>
+    </li>
+  </ul>
+</div>
