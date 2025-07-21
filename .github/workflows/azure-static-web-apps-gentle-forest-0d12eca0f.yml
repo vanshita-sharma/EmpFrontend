@@ -16,16 +16,16 @@ jobs:
     name: Build and Deploy Job
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Updated to v4
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4  # Updated to v4
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.19.0'
-          cache: 'npm'  # Added npm caching
+          node-version: '20.19.1'  # Changed to supported version
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci  # Use npm ci for faster, reliable builds
+        run: npm ci
 
       - name: Build Angular app
         run: npm run build -- --configuration production
@@ -38,6 +38,6 @@ jobs:
           action: "upload"
           app_location: "/"
           output_location: "dist/Costic"
-          # Force Node.js version for Azure Static Web Apps
+          skip_app_build: true  # Let GitHub Actions handle the build
         env:
-          NODE_VERSION: '20.19.0'
+          NODE_VERSION: '20.19.1'  # Updated to supported version
