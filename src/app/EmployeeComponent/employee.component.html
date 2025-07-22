@@ -2,19 +2,33 @@
   <h2>Employee Management</h2>
 
   <form (ngSubmit)="addEmployees()" class="form">
-    <input type="text" [(ngModel)]="newEmployee.name" name="name" placeholder="Name" required />
-    <input type="email" [(ngModel)]="newEmployee.mail" name="mail" placeholder="Email" required />
-    <input type="number" [(ngModel)]="newEmployee.salary" name="salary" placeholder="Salary" />
-    <input type="text" [(ngModel)]="newEmployee.domain" name="domain" placeholder="Domain" />
-    <button type="submit">Add</button>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newEmployee.name" name="name" placeholder="Name" required />
+      <input type="email" [(ngModel)]="newEmployee.mail" name="mail" placeholder="Email" required />
+    </div>
+    <div class="form-group">
+      <input type="number" [(ngModel)]="newEmployee.salary" name="salary" placeholder="Salary" min="1" required />
+      <input type="text" [(ngModel)]="newEmployee.domain" name="domain" placeholder="Domain" />
+    </div>
+    <button type="submit">Add Employee</button>
   </form>
 
   <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
 
-  <ul>
-    <li *ngFor="let emp of employees">
-      <span>{{ emp.name }} | {{ emp.mail }} | {{ emp.salary }} | {{emp.domain}}  </span>
-      <button (click)="deleteEmployee(emp.mail!)">Delete</button>
-    </li>
-  </ul>
+  <ul class="employee-list">
+  <li *ngFor="let emp of paginatedEmployees" class="employee-card">
+    <div class="emp-details">
+      <strong>{{ emp.name }}</strong>
+      <p>{{ emp.mail }}</p>
+      <p>₹{{ emp.salary }} | {{ emp.domain }}</p>
+    </div>
+    <button class="delete-btn" (click)="deleteEmployee(emp.mail!)">Delete</button>
+  </li>
+</ul>
+
+<!-- PAGINATION CONTROLS -->
+<div class="pagination-buttons" *ngIf="employees.length > pageSize">
+  <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+  <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= employees.length">Next</button>
+</div>
 </div>

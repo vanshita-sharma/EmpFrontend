@@ -1,30 +1,145 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .container {
-  width: 60%;
-  margin: auto;
+  max-width: 700px;
+  margin: 0px auto;
   padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
 }
 
 .form {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 input {
-  padding: 8px;
-  flex: 1;
+  padding: 10px;
+  flex: 1 1 45%;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: border 0.3s ease;
 }
 
-button {
-  background-color: teal;
+input:focus {
+  border-color: #008080;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: #008080;
   color: white;
-  padding: 8px 12px;
+  padding: 10px 15px;
   border: none;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
+  width: fit-content;
+  align-self: center;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #006666;
 }
 
 .error {
   color: red;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+.employee-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.employee-card {
+  background-color: white;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.employee-card:hover {
+  transform: scale(1.01);
+}
+
+.emp-details p {
+  margin: 2px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.delete-btn {
+  background-color: crimson;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+.employee-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.pagination-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #008080;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:hover:not(:disabled) {
+  background-color: #006666;
 }
