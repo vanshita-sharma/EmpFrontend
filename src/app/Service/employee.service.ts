@@ -17,11 +17,12 @@ export interface Employee {
 })
 
 export class EmployeeService{
-    private apiurl = `${environment.apiUrl}/Employee`;
+
+    private apiurl = `${environment.apiUrl}`;
     constructor(private http : HttpClient){}
 
     getAllEmployee(): Observable<Employee[]>{
-        return this.http.get<Employee[]>(this.apiurl)
+        return this.http.get<Employee[]>(`${this.apiurl}/GetAllEmployeesFunction?`)
     }
 
     getEmployeeById(id : number): Observable<Employee[]>{
@@ -29,10 +30,10 @@ export class EmployeeService{
     }
 
     addEmployee(emp :Employee) : Observable<Employee>{
-        return this.http.post<Employee>(this.apiurl, emp);
+        return this.http.post<Employee>(`${this.apiurl}/employees`, emp);
     }
 
     deleteEmployee(mail : string):Observable<any>{
-        return this.http.delete(`${this.apiurl}/${mail}`);
+        return this.http.delete(`${this.apiurl}/employees/${mail}`);
     }
 }
